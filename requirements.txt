@@ -1,0 +1,40 @@
+# keep in alphabetical order
+absl-py
+astar
+av
+celluloid # make easy animations with matplotlib
+cloudpickle
+dcargs
+dm_control
+einops
+flax
+gcsfs
+# git+https://github.com/openai/CLIP.git
+# git+https://github.com/ikostrikov/jaxrl.git
+h5py
+hydra-core
+imageio
+iopath
+# -e ./third_party/taming-transformers/
+# -e ./third_party/latent-diffusion
+matplotlib
+ml-collections
+moviepy
+mujoco
+pandas
+pytorch-lightning
+pytorchvideo
+pyinstrument
+ruamel.yaml
+scikit-learn
+scikit-image
+stable-baselines3
+tabulate
+# tensorflow-datasets
+# tensorflow
+timm
+transformers
+tqdm
+wandb
+
+# tfds-nightly

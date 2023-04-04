@@ -1,0 +1,22 @@
+\begin{table*}
+  \small
+  \caption{adroit relocate Results}
+  \label{tab:adroit_relocate}
+  \centering
+  \begin{tabular}{l l l l l l l l}
+    \toprule
+  Domain &       Dataset & Task &               MLP &              MTM-S &               MTM &             MTM-W &                                     (MTM-S) - (MTM) \\
+    \midrule
+         &        Expert &   BC & 152.63 $\pm$ 0.67 &  67.47 $\pm$ 10.60 & 65.98 $\pm$ 21.71 & 54.30 $\pm$ 26.15 &  \textcolor[rgb]{0.73,0.00,0.00}{-1.49 $\pm$ 32.31} \\
+  Adroit &        Expert & RCBC & 147.29 $\pm$ 2.82 & 114.61 $\pm$ 21.77 & 70.59 $\pm$ 26.13 & 70.59 $\pm$ 26.13 & \textcolor[rgb]{1.00,0.00,0.00}{-44.02 $\pm$ 47.91} \\
+Relocate &        Expert &   ID &   3.13 $\pm$ 0.00 &    0.76 $\pm$ 0.10 &   0.73 $\pm$ 0.02 &   0.76 $\pm$ 0.04 &                                    -0.00 $\pm$ 0.00 \\
+         &        Expert &   FD &   0.08 $\pm$ 0.00 &    7.63 $\pm$ 0.29 &   7.03 $\pm$ 2.45 &   9.01 $\pm$ 3.22 &                                    -0.00 $\pm$ 0.00 \\
+    \midrule
+         & Medium Replay &   BC &   4.74 $\pm$ 0.65 &    7.69 $\pm$ 1.98 &   8.23 $\pm$ 1.37 &   4.55 $\pm$ 2.84 &    \textcolor[rgb]{0.00,0.50,0.00}{0.54 $\pm$ 3.35} \\
+  Adroit & Medium Replay & RCBC &  14.84 $\pm$ 5.14 &    8.55 $\pm$ 3.66 &  10.15 $\pm$ 0.76 &  10.15 $\pm$ 0.76 &    \textcolor[rgb]{0.00,0.50,0.00}{1.60 $\pm$ 4.42} \\
+Relocate & Medium Replay &   ID &   9.23 $\pm$ 0.01 &    0.62 $\pm$ 0.01 &   0.75 $\pm$ 0.04 &   0.80 $\pm$ 0.07 &    \textcolor[rgb]{0.00,0.00,0.00}{0.00 $\pm$ 0.00} \\
+         & Medium Replay &   FD &   0.53 $\pm$ 0.00 &    1.46 $\pm$ 0.18 &   1.80 $\pm$ 0.34 &   1.86 $\pm$ 0.40 &    \textcolor[rgb]{0.00,0.00,0.00}{0.00 $\pm$ 0.00} \\
+    \midrule
+    \bottomrule
+  \end{tabular}
+\end{table*}

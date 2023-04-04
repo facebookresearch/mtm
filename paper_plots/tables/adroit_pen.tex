@@ -1,0 +1,22 @@
+\begin{table*}
+  \small
+  \caption{adroit pen Results}
+  \label{tab:adroit_pen}
+  \centering
+  \begin{tabular}{l l l l l l l l}
+    \toprule
+Domain &       Dataset & Task &              MLP &             MTM-S &              MTM &             MTM-W &                                   (MTM-S) - (MTM) \\
+    \midrule
+       &        Expert &   BC & 60.08 $\pm$ 1.95 &  53.09 $\pm$ 2.24 & 54.40 $\pm$ 1.78 & 47.23 $\pm$ 10.02 &  \textcolor[rgb]{0.00,0.50,0.00}{1.31 $\pm$ 4.02} \\
+Adroit &        Expert & RCBC & 63.97 $\pm$ 1.84 &  55.62 $\pm$ 4.13 & 59.22 $\pm$ 0.94 &  59.22 $\pm$ 0.94 &     \textcolor[rgb]{0.0,1.0,0.0}{3.60 $\pm$ 5.07} \\
+   Pen &        Expert &   ID & 64.52 $\pm$ 0.13 &   2.87 $\pm$ 0.24 &  5.00 $\pm$ 0.74 &   5.71 $\pm$ 0.97 &  \textcolor[rgb]{0.00,0.00,0.00}{0.01 $\pm$ 0.00} \\
+       &        Expert &   FD &  3.70 $\pm$ 0.08 & 56.06 $\pm$ 12.78 & 33.02 $\pm$ 0.90 &  34.30 $\pm$ 1.48 &                                  -0.02 $\pm$ 0.01 \\
+    \midrule
+       & Medium Replay &   BC & 30.55 $\pm$ 4.86 &  53.55 $\pm$ 6.50 & 51.52 $\pm$ 1.62 &  43.27 $\pm$ 3.21 & \textcolor[rgb]{1.00,0.00,0.00}{-2.03 $\pm$ 8.12} \\
+Adroit & Medium Replay & RCBC & 38.71 $\pm$ 3.36 &  55.48 $\pm$ 1.16 & 53.80 $\pm$ 1.20 &  53.80 $\pm$ 1.20 & \textcolor[rgb]{0.82,0.00,0.00}{-1.67 $\pm$ 2.36} \\
+   Pen & Medium Replay &   ID &  1.55 $\pm$ 0.00 &   0.18 $\pm$ 0.25 &  0.04 $\pm$ 0.00 &   0.05 $\pm$ 0.01 &                                  -0.04 $\pm$ 0.07 \\
+       & Medium Replay &   FD & 75.60 $\pm$ 5.19 &  65.23 $\pm$ 6.57 & 40.99 $\pm$ 3.13 &  52.50 $\pm$ 7.78 &                                  -0.02 $\pm$ 0.01 \\
+    \midrule
+    \bottomrule
+  \end{tabular}
+\end{table*}

@@ -1,0 +1,30 @@
+# @package _global_
+defaults:
+    - override /datasets: reacher
+
+
+tokenizers:
+    # FOR EXORL
+    states:
+      _target_: research.mtm.tokenizers.continuous.ContinuousTokenizer.create
+    actions:
+      _target_: research.mtm.tokenizers.continuous.ContinuousTokenizer.create
+
+
+args:
+    _target_: research.mtm.train.RunConfig
+    batch_size: 128
+    model_config:
+      traj_length: 32
+      norm: "none"
+      n_enc_layer: 2
+      n_dec_layer: 2
+      n_head: 4
+    log_every: 100
+    print_every: 1000
+    eval_every: 10000
+    save_every: 10000
+    mask_patterns: ["RANDOM", "ID", "FD", "GOAL"]
+
+wandb:
+    project: "reacher_experiments2"

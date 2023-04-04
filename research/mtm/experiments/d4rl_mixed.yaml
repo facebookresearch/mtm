@@ -1,0 +1,35 @@
+# @package _global_
+defaults:
+    - override /datasets: d4rl
+
+
+tokenizers:
+    states:
+      _target_: research.mtm.tokenizers.uniform_bins.UniformBinningTokenizer.create
+      num_bins: 128
+    actions:
+      _target_: research.mtm.tokenizers.continuous.ContinuousTokenizer.create
+    rewards:
+      _target_: research.mtm.tokenizers.uniform_bins.UniformBinningTokenizer.create
+      num_bins: 128
+
+
+args:
+    _target_: research.mtm.train.RunConfig
+    batch_size: 256
+    n_workers: 0
+    model_config:
+      traj_length: 32
+      norm: "none"
+      n_enc_layer: 2
+      n_dec_layer: 1
+      n_head: 4
+    log_every: 100
+    print_every: 1000
+    eval_every: 1000
+    save_every: 10000
+    mask_patterns: ["RANDOM", "ID", "FD", "GOAL"]
+
+wandb:
+    project: "rew_d4rl_mixed_12_5"
+    # resume: null

@@ -1,0 +1,8 @@
+# @package _global_
+hydra:
+  run:
+    dir: ./outputs/${hydra.job.name}/test_run
+    subdir: ${hydra.job.num}_${hydra.job.override_dirname}
+  sweep:
+    dir: ./outputs/${hydra.job.name}/test_run
+    subdir: ${hydra.job.num}_${hydra.job.override_dirname}

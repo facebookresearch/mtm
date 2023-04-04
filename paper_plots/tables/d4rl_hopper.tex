@@ -1,0 +1,32 @@
+\begin{table*}
+  \small
+  \caption{d4rl hopper Results}
+  \label{tab:d4rl_hopper}
+  \centering
+  \begin{tabular}{l l l l l l l l}
+    \toprule
+Domain &       Dataset & Task &               MLP &             MTM-S &               MTM &             MTM-W &                                    (MTM-S) - (MTM) \\
+    \midrule
+       &        Expert &   BC & 111.50 $\pm$ 0.14 & 111.20 $\pm$ 0.17 & 110.67 $\pm$ 0.43 & 110.36 $\pm$ 0.61 &  \textcolor[rgb]{0.23,0.00,0.00}{-0.53 $\pm$ 0.61} \\
+  D4RL &        Expert & RCBC & 111.75 $\pm$ 0.09 & 111.37 $\pm$ 0.19 & 110.87 $\pm$ 0.31 & 110.87 $\pm$ 0.31 &  \textcolor[rgb]{0.21,0.00,0.00}{-0.50 $\pm$ 0.51} \\
+Hopper &        Expert &   ID &   0.00 $\pm$ 0.00 &   0.01 $\pm$ 0.00 &   0.03 $\pm$ 0.00 &   0.05 $\pm$ 0.01 &   \textcolor[rgb]{0.00,0.00,0.00}{0.01 $\pm$ 0.00} \\
+       &        Expert &   FD &   0.06 $\pm$ 0.00 &   0.94 $\pm$ 0.12 &   0.03 $\pm$ 0.01 &   0.05 $\pm$ 0.01 &  \textcolor[rgb]{0.00,0.08,0.00}{-0.24 $\pm$ 0.03} \\
+    \midrule
+       & Medium Expert &   BC &  60.61 $\pm$ 5.67 & 82.09 $\pm$ 17.35 &  77.44 $\pm$ 8.20 & 66.80 $\pm$ 14.78 & \textcolor[rgb]{1.00,0.00,0.00}{-4.66 $\pm$ 25.55} \\
+  D4RL & Medium Expert & RCBC & 111.91 $\pm$ 0.15 & 111.23 $\pm$ 0.31 & 111.10 $\pm$ 0.63 & 111.10 $\pm$ 0.63 &  \textcolor[rgb]{0.02,0.00,0.00}{-0.13 $\pm$ 0.94} \\
+Hopper & Medium Expert &   ID &   0.01 $\pm$ 0.00 &   0.01 $\pm$ 0.00 &   0.08 $\pm$ 0.02 &   0.17 $\pm$ 0.09 &   \textcolor[rgb]{0.00,0.00,0.00}{0.02 $\pm$ 0.01} \\
+       & Medium Expert &   FD &   0.10 $\pm$ 0.00 &   1.10 $\pm$ 0.18 &   0.05 $\pm$ 0.01 &   0.13 $\pm$ 0.08 &  \textcolor[rgb]{0.00,0.04,0.00}{-0.16 $\pm$ 0.03} \\
+    \midrule
+       &        Medium &   BC &  59.06 $\pm$ 0.19 &  58.53 $\pm$ 5.58 &  58.20 $\pm$ 3.83 &  53.39 $\pm$ 6.94 &  \textcolor[rgb]{0.12,0.00,0.00}{-0.33 $\pm$ 9.40} \\
+  D4RL &        Medium & RCBC &  67.96 $\pm$ 2.73 &  61.62 $\pm$ 1.00 &  61.59 $\pm$ 6.60 &  61.59 $\pm$ 6.60 &                                   -0.03 $\pm$ 7.59 \\
+Hopper &        Medium &   ID &   0.02 $\pm$ 0.00 &   0.02 $\pm$ 0.00 &   0.07 $\pm$ 0.01 &   0.34 $\pm$ 0.19 &   \textcolor[rgb]{0.00,0.00,0.00}{0.01 $\pm$ 0.00} \\
+       &        Medium &   FD &   0.16 $\pm$ 0.02 &   1.50 $\pm$ 0.29 &   0.05 $\pm$ 0.01 &   0.18 $\pm$ 0.08 &  \textcolor[rgb]{0.00,0.04,0.00}{-0.16 $\pm$ 0.03} \\
+    \midrule
+       & Medium Replay &   BC &  43.05 $\pm$ 6.10 &  31.51 $\pm$ 3.03 & 38.81 $\pm$ 11.58 &  23.23 $\pm$ 7.47 &     \textcolor[rgb]{0.0,1.0,0.0}{7.29 $\pm$ 14.61} \\
+  D4RL & Medium Replay & RCBC &  91.57 $\pm$ 3.13 &  90.12 $\pm$ 2.61 &  92.12 $\pm$ 2.67 &  92.12 $\pm$ 2.67 &   \textcolor[rgb]{0.00,0.50,0.00}{1.99 $\pm$ 5.28} \\
+Hopper & Medium Replay &   ID &   0.08 $\pm$ 0.01 &   0.16 $\pm$ 0.02 &   0.33 $\pm$ 0.03 &   0.39 $\pm$ 0.05 &   \textcolor[rgb]{0.00,0.00,0.00}{0.02 $\pm$ 0.01} \\
+       & Medium Replay &   FD &   1.02 $\pm$ 0.05 &   4.89 $\pm$ 0.12 &   0.34 $\pm$ 0.09 &   0.41 $\pm$ 0.14 &  \textcolor[rgb]{0.00,0.07,0.00}{-0.23 $\pm$ 0.01} \\
+    \midrule
+    \bottomrule
+  \end{tabular}
+\end{table*}

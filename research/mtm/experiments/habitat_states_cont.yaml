@@ -1,0 +1,32 @@
+# @package _global_
+defaults:
+    - override /datasets: habitat
+
+
+tokenizers:
+    states:
+      _target_: research.mtm.tokenizers.continuous.ContinuousTokenizer.create
+    actions:
+      _target_: research.mtm.tokenizers.discrete_identity.DiscreteIdentity.create
+      num_classes: 6
+
+dataset:
+    use_images: False
+
+args:
+    _target_: research.mtm.train.RunConfig
+    batch_size: 128
+    model_config:
+      traj_length: 128
+      norm: "none"
+      n_enc_layer: 1
+      n_dec_layer: 1
+      n_head: 4
+    log_every: 100
+    print_every: 1000
+    eval_every: 10000
+    save_every: 10000
+    mask_patterns: ["RANDOM", "ID", "FD", "GOAL"]
+
+wandb:
+    project: "habitat_state_11_24"

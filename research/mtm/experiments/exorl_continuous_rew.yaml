@@ -1,0 +1,33 @@
+# @package _global_
+defaults:
+    - override /datasets: exorl
+
+
+tokenizers:
+    states:
+      _target_: research.mtm.tokenizers.continuous.ContinuousTokenizer.create
+    actions:
+      _target_: research.mtm.tokenizers.continuous.ContinuousTokenizer.create
+    rewards:
+      _target_: research.mtm.tokenizers.continuous.ContinuousTokenizer.create
+
+dataset:
+    use_rewards: True
+
+args:
+    _target_: research.mtm.train.RunConfig
+    batch_size: 2048
+    model_config:
+      traj_length: 16
+      norm: "none"
+      n_enc_layer: 1
+      n_dec_layer: 1
+      n_head: 4
+    log_every: 100
+    print_every: 1000
+    eval_every: 10000
+    save_every: 10000
+    mask_patterns: ["RANDOM", "ID", "FD", "GOAL"]
+
+wandb:
+    project: "exorl_rew_11_7"

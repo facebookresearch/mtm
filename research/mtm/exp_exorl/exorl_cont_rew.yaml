@@ -1,0 +1,17 @@
+# @package _global_
+defaults:
+    - override /datasets: exorl
+
+
+tokenizers:
+    states:
+      _target_: research.mtm.tokenizers.continuous.ContinuousTokenizer.create
+    actions:
+      _target_: research.mtm.tokenizers.continuous.ContinuousTokenizer.create
+
+dataset:
+    use_rewards: True
+
+wandb:
+    project: "exorl_01_04"
+    resume: allow

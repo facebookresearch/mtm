@@ -1,0 +1,37 @@
+\begin{table*}
+  \small
+  \caption{core mtm Results}
+  \label{tab:core_mtm}
+  \centering
+  \begin{tabular}{l l l l l l l}
+    \toprule
+Domain &       Dataset & Task &               MLP &      S-MTM (Ours) &                                 MTM (Ours) &                                     (MTM) - (S-MTM) \\
+    \midrule
+       &        Expert &   BC & 111.50 $\pm$ 0.14 & 111.20 $\pm$ 0.17 &     \tikzmark{top left 0}110.63 $\pm$ 0.34 &   \textcolor[rgb]{0.25,0.00,0.00}{-0.57 $\pm$ 0.52} \\
+  D4RL &        Expert & RCBC & 111.75 $\pm$ 0.09 & 111.37 $\pm$ 0.19 &                          111.01 $\pm$ 0.13 &   \textcolor[rgb]{0.14,0.00,0.00}{-0.36 $\pm$ 0.32} \\
+Hopper &        Expert &   ID & 0.004 $\pm$ 0.001 & 0.008 $\pm$ 0.001 &                          0.028 $\pm$ 0.006 &  \textcolor[rgb]{0.00,0.00,0.00}{0.020 $\pm$ 0.006} \\
+       &        Expert &   FD & 0.063 $\pm$ 0.001 & 0.939 $\pm$ 0.122 & 0.026 $\pm$ 0.005\tikzmark{bottom right 0} & \textcolor[rgb]{0.00,0.90,0.00}{-0.913 $\pm$ 0.127} \\
+    \midrule
+       & Medium Replay &   BC &  43.05 $\pm$ 6.10 &  31.51 $\pm$ 3.03 &      \tikzmark{top left 1}19.78 $\pm$ 4.04 &  \textcolor[rgb]{1.00,0.00,0.00}{-11.73 $\pm$ 7.07} \\
+  D4RL & Medium Replay & RCBC &  91.57 $\pm$ 3.13 &  90.12 $\pm$ 2.61 &                           92.32 $\pm$ 4.56 &       \textcolor[rgb]{0.0,1.0,0.0}{2.20 $\pm$ 7.17} \\
+Hopper & Medium Replay &   ID & 0.077 $\pm$ 0.009 & 0.156 $\pm$ 0.025 &                          0.358 $\pm$ 0.087 &  \textcolor[rgb]{0.50,0.00,0.00}{0.202 $\pm$ 0.112} \\
+       & Medium Replay &   FD & 1.018 $\pm$ 0.048 & 4.868 $\pm$ 0.119 & 0.521 $\pm$ 0.154\tikzmark{bottom right 1} & \textcolor[rgb]{0.00,1.00,0.00}{-4.348 $\pm$ 0.273} \\
+    \midrule
+       &        Expert &   BC & 148.20 $\pm$ 0.08 & 144.32 $\pm$ 2.01 &     \tikzmark{top left 2}144.40 $\pm$ 3.51 &    \textcolor[rgb]{0.00,0.00,0.00}{0.08 $\pm$ 5.51} \\
+Adroit &        Expert & RCBC & 149.19 $\pm$ 0.33 & 147.30 $\pm$ 0.54 &                          149.25 $\pm$ 1.91 &    \textcolor[rgb]{0.00,0.50,0.00}{1.95 $\pm$ 2.45} \\
+  Door &        Expert &   ID & 3.801 $\pm$ 0.004 & 0.426 $\pm$ 0.020 &                          0.562 $\pm$ 0.036 &  \textcolor[rgb]{0.50,0.00,0.00}{0.137 $\pm$ 0.056} \\
+       &        Expert &   FD & 0.072 $\pm$ 0.001 & 1.227 $\pm$ 0.652 & 0.880 $\pm$ 0.321\tikzmark{bottom right 2} & \textcolor[rgb]{0.00,0.28,0.00}{-0.347 $\pm$ 0.973} \\
+    \midrule
+       & Medium Replay &   BC &  25.21 $\pm$ 6.20 &  24.41 $\pm$ 4.01 &      \tikzmark{top left 3}32.49 $\pm$ 4.75 &       \textcolor[rgb]{0.0,1.0,0.0}{8.08 $\pm$ 8.76} \\
+Adroit & Medium Replay & RCBC &  58.96 $\pm$ 8.41 & 44.88 $\pm$ 20.11 &                          60.73 $\pm$ 17.30 &     \textcolor[rgb]{0.0,1.0,0.0}{15.84 $\pm$ 37.41} \\
+  Door & Medium Replay &   ID & 9.763 $\pm$ 0.031 & 0.604 $\pm$ 0.026 &                          0.666 $\pm$ 0.009 &  \textcolor[rgb]{0.00,0.00,0.00}{0.062 $\pm$ 0.035} \\
+       & Medium Replay &   FD & 2.199 $\pm$ 0.031 & 3.370 $\pm$ 1.009 & 2.442 $\pm$ 0.504\tikzmark{bottom right 3} & \textcolor[rgb]{0.00,0.92,0.00}{-0.928 $\pm$ 1.512} \\
+    \midrule
+    \bottomrule
+  \DrawBox[ultra thick, gray]{top left 0}{bottom right 0}
+\DrawBox[ultra thick, gray]{top left 1}{bottom right 1}
+\DrawBox[ultra thick, gray]{top left 2}{bottom right 2}
+\DrawBox[ultra thick, gray]{top left 3}{bottom right 3}
+
+  \end{tabular}
+\end{table*}

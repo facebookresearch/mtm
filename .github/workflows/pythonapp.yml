@@ -1,0 +1,35 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: Python application
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.8
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cpu
+        pip install -r requirements_dev.txt
+        pip install -r requirements.txt
+        pip install -e .
+    - name: Black
+      run: |
+        black --check .
+    - name: Test with pytest
+      run: |
+        pytest research --ignore=research/osil/quick_test_scripts --ignore=research/mtm

@@ -1,0 +1,39 @@
+# @package _global_
+defaults:
+    - override /datasets: exorl
+
+
+tokenizers:
+    states:
+      _target_: research.mtm.tokenizers.uniform_bins.UniformBinningTokenizer.create
+      num_bins: 64
+    actions:
+      _target_: research.mtm.tokenizers.uniform_bins.UniformBinningTokenizer.create
+      num_bins: 64
+    rewards:
+      _target_: research.mtm.tokenizers.uniform_bins.UniformBinningTokenizer.create
+      num_bins: 64
+
+dataset:
+    use_rewards: True
+    use_remove_vel: True
+    replay_buffer_dir: /checkpoint/philippwu/exorl
+
+args:
+    _target_: research.mtm.train.RunConfig
+    batch_size: 32
+    model_config:
+      traj_length: 64
+      norm: "none"
+      n_enc_layer: 2
+      n_dec_layer: 2
+      n_head: 4
+    log_every: 100
+    print_every: 1000
+    eval_every: 10000
+    save_every: 10000
+    mask_patterns: ["RANDOM", "ID", "FD", "GOAL"]
+    wandb:
+      _target_: research.logger.WandBLoggerConfig
+      project: "exorl_11_23_discrete"
+      resume: True

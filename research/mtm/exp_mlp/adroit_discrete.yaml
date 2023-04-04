@@ -1,0 +1,18 @@
+# @package _global_
+defaults:
+    - override /datasets: adroit
+
+tokenizers:
+    states:
+      _target_: research.mtm.tokenizers.uniform_bins.UniformBinningTokenizer.create
+      num_bins: 256
+    actions:
+      _target_: research.mtm.tokenizers.uniform_bins.UniformBinningTokenizer.create
+      num_bins: 256
+    returns:
+      _target_: research.mtm.tokenizers.uniform_bins.UniformBinningTokenizer.create
+      num_bins: 32
+
+wandb:
+    project: "mlp_cont_01_01"
+    resume: allow

@@ -1,0 +1,33 @@
+# @package _global_
+defaults:
+    - override /datasets: d4rl
+
+tokenizers:
+    # states:
+    #   _target_: research.mtm.tokenizers.continuous.ContinuousTokenizer.create
+    # actions:
+    #   _target_: research.mtm.tokenizers.continuous.ContinuousTokenizer.create
+    # returns:
+    #   _target_: research.mtm.tokenizers.continuous.ContinuousTokenizer.create
+    states:
+      _target_: research.mtm.tokenizers.split_continuous.SplitContinuousTokenizer.create
+      splits: 2
+    actions:
+      _target_: research.mtm.tokenizers.split_continuous.SplitContinuousTokenizer.create
+      splits: 4
+    returns:
+      _target_: research.mtm.tokenizers.continuous.ContinuousTokenizer.create
+
+state_only_dataset:
+    _target_: research.mtm.datasets.d4rl_ds.get_datasets
+    seq_steps: ???
+    env_name: "hopper-expert-v2"
+    seed: 0
+
+dataset:
+    use_reward: True
+    env_name: "hopper-medium-replay-v2"
+
+wandb:
+    project: "rew_fix_d4rl_new_12_30"
+    resume: allow
