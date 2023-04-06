@@ -1,6 +1,5 @@
-from jaxrl.datasets.d4rl_dataset import D4RLDataset
-from jaxrl.utils import make_env
-
+from research.jaxrl.datasets.d4rl_dataset import D4RLDataset
+from research.jaxrl.utils import make_env
 from research.mtm.datasets.sequence_dataset import SequenceDataset
 
 

@@ -241,7 +241,7 @@ def _main(hydra_cfg):
     wandb_cfg_log = WandBLoggerConfig(
         experiment_id=f"{dp.job_id}-{dp.rank}",
         project=hydra_cfg.wandb.project,
-        entity=hydra_cfg.wandb.entity,
+        entity=hydra_cfg.wandb.entity or None,
         resume=hydra_cfg.wandb.resume,
         group=dp.job_id,
     )

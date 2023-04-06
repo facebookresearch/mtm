@@ -3,8 +3,8 @@ import warnings
 from multiprocessing import cpu_count, current_process, get_context
 from typing import Any, List, Literal
 
-import dcargs
 import tqdm
+import tyro
 
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
@@ -175,4 +175,4 @@ def save_new_files(
 
 
 if __name__ == "__main__":
-    dcargs.cli(main)
+    tyro.cli(main)

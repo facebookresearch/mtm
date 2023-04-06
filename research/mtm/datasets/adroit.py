@@ -18,8 +18,6 @@ from research.mtm.datasets.sequence_dataset import (
 )
 from research.mtm.tokenizers.base import TokenizerManager
 
-p = dmc2gym.walker_pose.SEMANTIC_POSES
-
 
 def episode_len(episode):
     return next(iter(episode.values())).shape[0]

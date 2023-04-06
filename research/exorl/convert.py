@@ -3,8 +3,8 @@ import warnings
 from multiprocessing import cpu_count, current_process, get_context
 from typing import Any, List, Literal
 
-import dcargs
 import tqdm
+import tyro
 
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
@@ -15,16 +15,10 @@ os.environ["MUJOCO_GL"] = "egl"
 
 from pathlib import Path
 
-import hydra
-import numpy as np
-import torch
-import torch.nn as nn
-from dm_env import specs
-
 import dmc
+import numpy as np
 import utils
-from logger import Logger
-from replay_buffer import load_episode, make_replay_loader
+from replay_buffer import load_episode
 from train_offline import get_domain
 
 # TODO add other environments
@@ -157,4 +151,4 @@ def save_new_files(
 
 
 if __name__ == "__main__":
-    dcargs.cli(main)
+    tyro.cli(main)

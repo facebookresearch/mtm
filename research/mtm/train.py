@@ -2,6 +2,7 @@
 Main script for training a policy given a dataset.
 """
 import os
+import wandb
 import pprint
 import random
 import time
@@ -16,7 +17,6 @@ import torch.distributed
 import torch.multiprocessing
 import torch.nn.functional as F
 import torch.nn.parallel
-import wandb
 from omegaconf import DictConfig, OmegaConf
 from torch.optim.lr_scheduler import LambdaLR
 from torch.utils.data.dataloader import DataLoader
@@ -873,7 +873,7 @@ def _main(hydra_cfg):
     wandb_cfg_log = WandBLoggerConfig(
         experiment_id=f"{dp.job_id}-{dp.rank}",
         project=hydra_cfg.wandb.project,
-        entity=hydra_cfg.wandb.entity,
+        entity=hydra_cfg.wandb.entity or None,
         resume=hydra_cfg.wandb.resume,
         group=dp.job_id,
     )
@@ -1154,7 +1154,6 @@ def _main(hydra_cfg):
         # if step % cfg.log_every == 0:
         if random.randint(0, cfg.log_every) == 0:
             logger.info(f"Step {step}")
-            # wandb.log(log_dict, step=step)
             wandb_logger.log(log_dict, step=step)
 
         step += 1

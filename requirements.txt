@@ -1,40 +1,14 @@
-# keep in alphabetical order
-absl-py
-astar
-av
-celluloid # make easy animations with matplotlib
-cloudpickle
-dcargs
-dm_control
-einops
-flax
-gcsfs
-# git+https://github.com/openai/CLIP.git
-# git+https://github.com/ikostrikov/jaxrl.git
-h5py
-hydra-core
-imageio
-iopath
-# -e ./third_party/taming-transformers/
-# -e ./third_party/latent-diffusion
-matplotlib
-ml-collections
-moviepy
-mujoco
-pandas
-pytorch-lightning
-pytorchvideo
-pyinstrument
-ruamel.yaml
-scikit-learn
-scikit-image
-stable-baselines3
-tabulate
-# tensorflow-datasets
-# tensorflow
-timm
-transformers
-tqdm
-wandb
+d4rl@git+https://github.com/ikostrikov/d4rl.git@99c475c7e187b370fa7621c6b2771d20421a4f18
+dmc2gym@git+https://github.com/denisyarats/dmc2gym.git@06f7e335d988b17145947be9f6a76f557d0efe81
 
-# tfds-nightly
+cloudpickle
+dm_control==1.0.11
+einops
+hydra-core
+imageio==2.21.3
+iopath==0.1.10
+matplotlib
+gym==0.19
+tqdm==4.64.1
+tyro
+wandb

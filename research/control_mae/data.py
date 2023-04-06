@@ -11,10 +11,10 @@ import numpy as np
 import torch
 import tqdm
 import wandb
-from jaxrl.datasets.d4rl_dataset import D4RLDataset
-from jaxrl.utils import make_env
 from torch.utils.data import IterableDataset
 
+from research.jaxrl.datasets.d4rl_dataset import D4RLDataset
+from research.jaxrl.utils import make_env
 from research.mtm.datasets.base import DataStatistics
 from research.mtm.tokenizers.base import TokenizerManager
 

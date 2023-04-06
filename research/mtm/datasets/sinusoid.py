@@ -9,7 +9,7 @@ import numpy as np
 import torch
 from torch.utils.data import Dataset
 
-from research.mtm.datasets.base import DatasetProtocol
+from research.mtm.datasets.base import DatasetProtocol, DataStatistics
 
 
 def get_datasets(
@@ -59,3 +59,13 @@ class SinusoidDataset(Dataset, DatasetProtocol):
 
     def eval_logs(self, model: Callable) -> Dict[str, Any]:
         return {}
+
+    def trajectory_statistics(self) -> Dict[str, DataStatistics]:
+        return {
+            "states": DataStatistics(
+                mean=self._data.mean().numpy(),
+                std=self._data.std().numpy(),
+                min=self._data.min().numpy(),
+                max=self._data.max().numpy(),
+            )
+        }

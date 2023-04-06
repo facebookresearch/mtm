@@ -51,8 +51,8 @@ args:
 
 
 wandb:
-  project: reacher_experiments
-  entity: mtm_team
+  project: experiments
+  entity: ""
   resume: null
   # resume: allow
   # mode: disabled

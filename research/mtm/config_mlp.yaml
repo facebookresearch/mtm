@@ -37,7 +37,7 @@ args:
 
 wandb:
   project: d4rl_mlp_12_28
-  entity: mtm_team
+  entity: ""
   resume: null
   # resume: allow
   # mode: disabled
