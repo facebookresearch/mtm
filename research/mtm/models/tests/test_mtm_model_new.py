@@ -1,6 +1,6 @@
 import torch
 
-from research.mtm.models.mtm_model import MaskedDP, MTMConfig
+from research.mtm.models.mtm_model import MTM, MTMConfig
 
 
 def test_maskdp_model_simple():
@@ -16,7 +16,7 @@ def test_maskdp_model_simple():
         "states": (1, features_dim),
     }
 
-    model = MaskedDP(
+    model = MTM(
         data_shapes,
         traj_length,
         MTMConfig(
@@ -54,7 +54,7 @@ def test_maskdp_model_simple():
 #     dropout = 0.0
 #     traj_length = 9
 #
-#     model = MaskedDP(
+#     model = MTM(
 #         features_dim,
 #         action_dim,
 #         MTMConfig(
@@ -82,7 +82,7 @@ def test_maskdp_model_simple():
 #     dropout = 0.0
 #     traj_length = 9
 #
-#     model = MaskedDP(
+#     model = MTM(
 #         features_dim,
 #         action_dim,
 #         MTMConfig(

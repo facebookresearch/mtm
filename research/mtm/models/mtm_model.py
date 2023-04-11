@@ -175,10 +175,10 @@ class MTMConfig:
     use_masked_loss: bool = False
 
     def create(self, data_shape, traj_length):
-        return MaskedDP(data_shape, traj_length, self)
+        return MTM(data_shape, traj_length, self)
 
 
-class MaskedDP(nn.Module):
+class MTM(nn.Module):
     def __init__(
         self,
         data_shapes: Dict[str, Tuple[int, ...]],

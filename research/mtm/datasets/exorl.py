@@ -15,7 +15,7 @@ import wandb
 from gym import spaces
 from torch.utils.data import Dataset
 
-import research.control_mae.dmc as dmc
+from research.exorl import dmc
 from research.exorl.replay_buffer import episode_len, load_episode, relable_episode
 from research.mtm.datasets.base import DatasetProtocol, DataStatistics
 from research.mtm.tokenizers.base import TokenizerManager

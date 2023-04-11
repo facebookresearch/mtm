@@ -10,11 +10,6 @@ tokenizers:
     returns:
       _target_: research.mtm.tokenizers.continuous.ContinuousTokenizer.create
 
-# model_config:
-#     n_enc_layer: 3
-#     n_dec_layer: 1
-#     latent_dim: 64
-
 dataset:
     use_reward: True
 

@@ -11,13 +11,13 @@ import utils
 from omegaconf import OmegaConf
 from torch.utils.data.dataloader import DataLoader
 
-from research.mtm.models.mtm_model import MaskedDP
+from research.mtm.models.mtm_model import MTM
 from research.mtm.tokenizers.base import Tokenizer, TokenizerManager
 
 
 def get_mtm_model(
     path: str,
-) -> Tuple[MaskedDP, TokenizerManager, Dict[str, Tuple[int, int]]]:
+) -> Tuple[MTM, TokenizerManager, Dict[str, Tuple[int, int]]]:
     def _get_dataset(dataset, traj_length):
         return hydra.utils.call(dataset, seq_steps=traj_length)
 
@@ -57,7 +57,7 @@ def get_mtm_model(
         data_shapes[k] = v.shape[-2:]
 
     model_config = hydra.utils.instantiate(hydra_cfg.model_config)
-    model = MaskedDP(data_shapes, cfg.traj_length, model_config)
+    model = MTM(data_shapes, cfg.traj_length, model_config)
     model.load_state_dict(torch.load(ckpt_path)["model"])
     model.eval()
 

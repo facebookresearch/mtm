@@ -2,7 +2,6 @@
 Main script for training a policy given a dataset.
 """
 import os
-import wandb
 import pprint
 import random
 import time
@@ -17,6 +16,7 @@ import torch.distributed
 import torch.multiprocessing
 import torch.nn.functional as F
 import torch.nn.parallel
+import wandb
 from omegaconf import DictConfig, OmegaConf
 from torch.optim.lr_scheduler import LambdaLR
 from torch.utils.data.dataloader import DataLoader
@@ -39,7 +39,7 @@ from research.mtm.masks import (
     create_rcbc_mask,
     maybe_add_rew_to_mask,
 )
-from research.mtm.models.mtm_model import MaskedDP, make_plots_with_masks
+from research.mtm.models.mtm_model import MTM, make_plots_with_masks
 from research.mtm.tokenizers.base import Tokenizer, TokenizerManager
 from research.mtm.tokenizers.continuous import ContinuousTokenizer
 from research.mtm.utils import (
@@ -54,7 +54,7 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 
 
 def eval_fd(
-    model: MaskedDP,
+    model: MTM,
     env,
     eval_batch,
     tokenizer_manager,
@@ -98,7 +98,7 @@ def eval_fd(
 
 
 def eval_id(
-    model: MaskedDP, env, eval_batch, tokenizer_manager, ratio: int = 1
+    model: MTM, env, eval_batch, tokenizer_manager, ratio: int = 1
 ) -> Dict[str, Any]:
     """Evaluate the model on the inverse dynamics task.
     Args:
@@ -194,7 +194,7 @@ def eval_id(
 
 
 def eval_full_id(
-    model: MaskedDP, env, eval_batch, tokenizer_manager, ratio: int = 1
+    model: MTM, env, eval_batch, tokenizer_manager, ratio: int = 1
 ) -> Dict[str, Any]:
     """Evaluate the model on the inverse dynamics task.
     Args:
@@ -559,7 +559,7 @@ class RunConfig:
 
 @torch.inference_mode()
 def evaluate(
-    model: MaskedDP,
+    model: MTM,
     tokenizer_manager: TokenizerManager,
     discrete_map: Dict[str, bool],
     val_batch: Dict[str, torch.Tensor],
@@ -574,7 +574,7 @@ def evaluate(
         losses_dict,
         masked_losses,
         masked_c_losses,
-    ) = MaskedDP.forward_loss(
+    ) = MTM.forward_loss(
         encoded_batch,
         predicted_trajectories,
         masks,
@@ -625,7 +625,7 @@ def evaluate(
 
 
 def train_one_batch(
-    model: MaskedDP,
+    model: MTM,
     optimizer: torch.optim.Optimizer,
     scheduler: Callable,
     tokenizer_manager: TokenizerManager,
@@ -644,7 +644,7 @@ def train_one_batch(
     if loss_keys is None:
         loss_keys = model_without_ddp.config.loss_keys
 
-    loss, losses_dict, masked_losses, masked_c_losses = MaskedDP.forward_loss(
+    loss, losses_dict, masked_losses, masked_c_losses = MTM.forward_loss(
         encoded_batch,
         predicted_trajectories,
         masks,
@@ -837,7 +837,7 @@ def _main(hydra_cfg):
             model, device_ids=[dp.local_rank], output_device=dp.local_rank
         )
 
-    optimizer = MaskedDP.configure_optimizers(
+    optimizer = MTM.configure_optimizers(
         model,
         learning_rate=cfg.learning_rate,
         weight_decay=cfg.weight_decay,

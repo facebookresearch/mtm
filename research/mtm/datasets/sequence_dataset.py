@@ -365,18 +365,12 @@ class SequenceDataset:
 
         if self.use_avg:
             # special hard-coded case for using avg reward to go
-            save_path = Path(
-                f"/checkpoint/philippwu/d4rl/d4rl_statistics_{self._name}_avg.pkl"
-            )
+            save_path = Path(f"/tmp/d4rl/d4rl_statistics_{self._name}_avg.pkl")
         else:
             if self.discount == 1.0:
-                save_path = Path(
-                    f"/checkpoint/philippwu/d4rl/d4rl_statistics_{self._name}_d=1.0.pkl"
-                )
+                save_path = Path(f"/tmp/d4rl/d4rl_statistics_{self._name}_d=1.0.pkl")
             elif self.discount == 0.99:
-                save_path = Path(
-                    f"/checkpoint/philippwu/d4rl/d4rl_statistics_{self._name}.pkl"
-                )
+                save_path = Path(f"/tmp/d4rl/d4rl_statistics_{self._name}.pkl")
             else:
                 raise NotImplementedError
 
@@ -406,6 +400,8 @@ class SequenceDataset:
             for k, v in trajectories.items()
         }
         try:
+            # make sure the directory exists
+            save_path.parent.mkdir(parents=True, exist_ok=True)
             with open(save_path, "wb") as f:
                 pickle.dump(ret_dict, f)
         except Exception as e:

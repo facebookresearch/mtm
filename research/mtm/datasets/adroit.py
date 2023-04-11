@@ -2,7 +2,6 @@ import pickle
 from pathlib import Path
 from typing import Any, Callable, Dict
 
-import dmc2gym
 import numpy as np
 import wandb
 from mjrl.utils.gym_env import GymEnv
@@ -192,11 +191,9 @@ class OfflineReplayBuffer(Dataset, DatasetProtocol):
 
     def trajectory_statistics(self) -> Dict[str, DataStatistics]:
         if self.use_avg:
-            save_path = (
-                f"/checkpoint/philippwu/adroit/adroit_{self.name}_statistics_avg.pkl"
-            )
+            save_path = f"/tmp/adroit/adroit_{self.name}_statistics_avg.pkl"
         else:
-            save_path = f"/checkpoint/philippwu/adroit/adroit_{self.name}_statistics_{self.discount}.pkl"
+            save_path = f"/tmp/adroit/adroit_{self.name}_statistics_{self.discount}.pkl"
 
         if self.use_achieved:
             save_path = save_path.replace(".pkl", "_achieved.pkl")
@@ -227,6 +224,7 @@ class OfflineReplayBuffer(Dataset, DatasetProtocol):
                 np.max(d, axis=0),
             )
 
+        save_path.parent.mkdir(parents=True, exist_ok=True)
         with open(save_path, "wb") as f:
             pickle.dump(data_stats, f)
         return data_stats

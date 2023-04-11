@@ -4,7 +4,7 @@ hydra:
         _target_: hydra_plugins.hydra_submitit_launcher.submitit_launcher.SlurmLauncher
         name: ${hydra.job.name}
         submitit_folder: ${hydra.sweep.dir}/.submitit/%j
-        partition: devlab
+        # partition: devlab
 
         # nodes: 4
         # gpus_per_node: 8

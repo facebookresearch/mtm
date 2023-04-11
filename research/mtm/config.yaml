@@ -32,21 +32,21 @@ args:
     log_every: 100
     print_every: 1000
     eval_every: 20000
-    # eval_every: 5000
+    # eval_every: 1000
     save_every: 10000
 
     device: cuda
     # mask_ratios: [0.4, 0.5, 0.6, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95]
-    mask_ratios: [0.7, 0.8, 0.85, 0.9, 0.95, 1.0]
+    mask_ratios: [0.75, 0.8, 0.85, 0.9, 0.95, 1.0]
     mask_patterns: ["AUTO_MASK"]
     warmup_steps: 40000
     # num_train_steps: 1000000
     # num_train_steps: 1000001
-    num_train_steps: 500001
+    num_train_steps: 200001
     # num_train_steps: 100000
     learning_rate: 0.0001
     weight_decay:  0.01
-    mode_weights: [0.2,0.0,0.8]
+    mode_weights: [0.2, 0.1, 0.7]
     tsp_ratio: 1
 
 
