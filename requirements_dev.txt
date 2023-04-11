@@ -13,4 +13,3 @@ pre-commit
 pyright
 pytest
 python-lsp-server[all]
-patchelf
