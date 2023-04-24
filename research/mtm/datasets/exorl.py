@@ -518,7 +518,7 @@ def main():
         domain = "point_mass_maze"
     else:
         domain = env_name.split("_", 1)[0]
-    replay_buffer_dir = "~/exorl_data"
+    replay_buffer_dir = "~/mtm_data/exorl_data"
     replay_train_dir = Path(replay_buffer_dir) / domain / "proto" / "buffer_updated"
 
     sequence_length = 16

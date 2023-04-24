@@ -33,6 +33,7 @@ If you wish to run Adroit experiments, please install also install `robohive`.
    * `pip install git+https://github.com/aravindr93/mjrl.git@83d35df95eb64274c5e93bb32a0a4e2f6576638a`
  * [robohive](https://github.com/vikashplus/robohive/tree/stable) - use the `stable` branch (note, it uses gitsubmodules, follow install instructions exactly)
    * specifically, we have tested using this commit - `c1557f5572977085f053df63f4e81f4b4e1fb17c`
+* Additionally you must download the adroit datasets and put them in the `~/mtm_data` directory
 
 # Running The MTM code
 All code is located in the `mtm` folder.
