@@ -3,11 +3,11 @@ from typing import Any, NamedTuple
 
 import dm_env
 import numpy as np
-from dm_control import manipulation, suite
+from dm_control import suite
 from dm_control.suite.wrappers import action_scale, pixels
 from dm_env import StepType, specs
 
-import custom_dmc_tasks as cdmc
+import research.exorl.custom_dmc_tasks as cdmc
 
 
 class ExtendedTimeStep(NamedTuple):

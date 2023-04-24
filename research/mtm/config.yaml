@@ -11,16 +11,16 @@ model_config:
     n_enc_layer: 2
     n_dec_layer: 1
     n_head: 4
-    dropout: 0.0
+    dropout: 0.1
     loss_keys: null
-    latent_dim: 32
+    latent_dim: null
 
 state_only_dataset: null
 
 args:
     _target_: research.mtm.train.RunConfig
     seed: 0
-    batch_size: 1024
+    batch_size: 2048
     n_workers: 10
     traj_length: 4
 
@@ -29,23 +29,19 @@ args:
     # print_every: 1
     # eval_every: 1
     # save_every: 1
+
     log_every: 100
     print_every: 1000
     eval_every: 20000
-    # eval_every: 1000
     save_every: 10000
 
     device: cuda
-    # mask_ratios: [0.4, 0.5, 0.6, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95]
-    mask_ratios: [0.75, 0.8, 0.85, 0.9, 0.95, 1.0]
+    mask_ratios: [0.5, 0.6, 0.7, 0.8, 0.85, 0.9, 0.95, 1.0]
     mask_patterns: ["AUTO_MASK"]
     warmup_steps: 40000
-    # num_train_steps: 1000000
-    # num_train_steps: 1000001
-    num_train_steps: 200001
-    # num_train_steps: 100000
+    num_train_steps: 140010
     learning_rate: 0.0001
-    weight_decay:  0.01
+    weight_decay:  0.005
     mode_weights: [0.2, 0.1, 0.7]
     tsp_ratio: 1
 
@@ -55,9 +51,7 @@ wandb:
   entity: ""
   resume: null
   # resume: allow
-  # mode: disabled
 
-# general outputs
 job_name: job
 
 hydra:

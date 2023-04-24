@@ -1,23 +1,19 @@
-# NEW INSTRUCTIONS
+# ExORL
 
-Install dependencies:
-```sh
-conda env create -f conda_env.yml
-conda activate exorl
+The code in this folder is modified from https://github.com/denisyarats/exorl.
+
+See agent/td3_mtm.yaml and agent/td3_mtm.py for for details of how MTM state representations are used.
+
+Follow the original instructions below for setting up additional ExORL dependencies and for downloading the dataset.
+
+```
+./download.sh walker proto
 ```
 
-Install torch with GPU support
-https://pytorch.org/get-started/locally/
-
-
-Quick start!
-
-Download the data for walker with data collected from the proto
+Since the original creation of ExORL, mujoco has seen many updates. To rerun all the actions and collect a physics consistent data, you may optionally use the update_data.py utility.
 ```
-./download_and_convert.sh
+python update_data.py --num-workers 10 --env-name walker --expl-agent proto
 ```
-
-Run the `train_state_predictor.ipynb` to see a simple example of using the data to train a joint state predictor from images!
 
 
 # ExORL: Exploratory Data for Offline Reinforcement Learning

@@ -15,9 +15,6 @@ stddev_clip: 0.3
 nstep: 1
 batch_size: 1024 # 256 for pixels
 has_next_action: False
-# path: "/private/home/philippwu/mtm/outputs/mtm_mae/2023-01-06_01-37-00/134_+exp_exorl=exorl_cont_rew,args.batch_size=1024,args.mask_patterns=[AUTO_MASK,BC],args.n_workers=0,args.traj_length=8,wandb.project=exorl_1_5"
-# path: "/private/home/philippwu/mtm/outputs/mtm_mae/2023-01-06_01-37-00/71_+exp_exorl=exorl_discrete_rew,args.batch_size=1024,args.mask_patterns=[AUTO_MASK,FULL_RANDOM,ID,FD,BC],args.n_workers=0,args.traj_length=8,wandb.project=exorl_1_5"
-
 
 # new model
-path: "/private/home/philippwu/mtm/outputs/mtm_mae/2023-03-15_03-08-46/2_+exp_exorl=exorl_cont,args.batch_size=1024,args.mask_patterns=[AUTO_MASK],args.n_workers=0,args.seed=2,args.traj_length=8,wandb.project=exorl_reb_3_16"
+path: "/TODO/path/to/model/folder"

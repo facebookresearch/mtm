@@ -262,6 +262,7 @@ class MTM(nn.Module):
         self.output_head_dict = nn.ModuleDict()
         for key, shape in data_shapes.items():
             self.output_head_dict[key] = nn.Sequential(
+                nn.LayerNorm(self.n_embd),
                 nn.Linear(self.n_embd, self.n_embd),
                 nn.GELU(),
                 nn.Linear(self.n_embd, shape[-1]),
@@ -269,13 +270,6 @@ class MTM(nn.Module):
         pos_embed = get_1d_sincos_pos_embed_from_grid(self.n_embd, self.max_len)
         pe = torch.from_numpy(pos_embed).float()[None, :, None, :] / 2.0
         self.register_buffer("pos_embed", pe)
-
-    #     self.apply(self._init_weights)
-    #
-    # def _init_weights(self, module):
-    #     """Initialize the weights."""
-    #     if isinstance(module, (nn.Linear, nn.Embedding)):
-    #         module.weight.data.normal_(mean=0.0, std=0.02)
 
     @staticmethod
     def forward_loss(
@@ -499,7 +493,6 @@ class MTM(nn.Module):
                 ids_restore[k].shape[0] == x_.shape[1]
             ), f"{ids_restore[k]}, {x_.shape}"
 
-            # TODO unit test this code
             # re organize the indicies to be in their original positions
             x_ = torch.gather(
                 x_,
@@ -569,8 +562,6 @@ class MTM(nn.Module):
 
                 flattened_mask = masks_copy[k].reshape(L * I, -1)
                 flattened_trajectory = trajectories_copy[k].reshape(B * L * I, -1)
-
-                # import ipdb; ipdb.set_trace();
 
                 indices = indices_[~flattened_mask.bool()[indices_[:, 0]]]
                 indices = indices[:num_choose]

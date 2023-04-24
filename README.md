@@ -40,11 +40,22 @@ All code is located in the `mtm` folder.
  * Simple sinusoidal test data `python research/mtm/train.py +exp_mtm=sinusoid_cont`
  * D4RL `python research/mtm/train.py +exp_mtm=d4rl_cont`
  * Adroit `python research/mtm/train.py +exp_mtm=adroit_cont`
+ * Adroit `python research/mtm/train.py +exp_mtm=exorl_cont`
+
+An example notebook is located at `researach/mtm/example_train_sinusoid.ipynb`.
 
 ### Running specific experiments
  * Experiment configuration yaml files are located in `research/mtm/experiments`
- * to run one you can append a `+experiments="file_name"` to the command. For example, to use the `exorl_discrete.yaml` config run:
+ * To run one you can append a `+experiments="file_name"` to the command. For example, to use the `exorl_discrete.yaml` config run:
    * `CUDA_VISIBLE_DEVICES=0 python research/mtm/train.py +experiments=exorl_discrete`
+
+### Configuring MTM
+ * The config file for mtm is located at `research/mtm/config.yaml`
+ * Some key parameters
+   * `traj_length`: The length of trajectory sub-segments
+   * `mask_ratios`: A list of mask ratios that is randomly sampled
+   * `mask_pattterns`: A list of masking patterns that are randomly sampled. See `MaskType` under `research/mtm/masks.py` for supported options.
+   * `mode_weights`: (Only applies for `AUTO_MASK`) A list of weights that samples which mode is to be the "autoregressive" one. For example, if the mode order is, `states`, `returns`, `actions`, and mode_weights = [0.2, 0.1, 0.7], then with 0.7 probability, the action token and all future tokens will be masked out.
 
 # Code Organization
 
@@ -58,8 +69,6 @@ pre-commit install
 ```
 
 If you want to make a commit without using the pre-commit hook, you can commit with the -n flag (ie. `git commit -n ...`).
-
-
 
 ### Datasets
  * all dataset code is located in the `research/mtm/datasets` folder. All datasets have to do is return a pytorch dataset that outputs a dict (named set of trajectories).

@@ -265,23 +265,21 @@ class SequenceDataset:
         results, videos = evaluate(
             bc_sampler,
             self.dataset.env,
-            50,
+            20,
             (self.observation_dim,),
             (self.action_dim,),
             num_videos=0,
         )
         for k, v in results.items():
-            log_data[f"eval1/{k}"] = v
+            log_data[f"eval_bc/{k}"] = v
         for idx, v in enumerate(videos):
-            log_data[f"eval1_video_{idx}/video"] = wandb.Video(
+            log_data[f"eval_bc_video_{idx}/video"] = wandb.Video(
                 v.transpose(0, 3, 1, 2), fps=10, format="gif"
             )
 
         if "returns" in tokenizer_manager.tokenizers:
-            # # for p in [0.6, 0.7, 0.8, 0.9, 1.0, 1.1]:
-            # for p in [0.9]:
             for p in [0.6, 0.7, 0.8, 0.9, 1.0, 1.1]:
-                bc_sampler = lambda o, t: sample_action_bc4(
+                bc_sampler = lambda o, t: sample_action_bc2(
                     o,
                     t,
                     model,
@@ -294,7 +292,7 @@ class SequenceDataset:
                 results, videos = evaluate(
                     bc_sampler,
                     self.dataset.env,
-                    50,
+                    20,
                     (self.observation_dim,),
                     (self.action_dim,),
                     num_videos=0,
@@ -306,57 +304,32 @@ class SequenceDataset:
                         v.transpose(0, 3, 1, 2), fps=10, format="gif"
                     )
 
-        # if "returns" in tokenizer_manager.tokenizers:
-        #     # # for p in [0.6, 0.7, 0.8, 0.9, 1.0, 1.1]:
-        #     # for p in [0.9]:
-        #     for p in [0.6, 0.7, 0.8, 0.9, 1.0, 1.1]:
-        #         # bc_sampler = lambda o, t: sample_action_bc5(
-        #         bc_sampler = lambda o, t: sample_action_bc_two_stage(
-        #             o,
-        #             t,
-        #             model,
-        #             tokenizer_manager,
-        #             observation_shape,
-        #             action_shape,
-        #             device,
-        #             percentage=p,
-        #         )
-        #         results, videos = evaluate(
-        #             bc_sampler,
-        #             self.dataset.env,
-        #             50,
-        #             (self.observation_dim,),
-        #             (self.action_dim,),
-        #             num_videos=0,
-        #         )
-        #         for k, v in results.items():
-        #             log_data[f"eval5/p={p}_{k}"] = v
-        #         for idx, v in enumerate(videos):
-        #             log_data[f"eval5_video_{idx}/p={p}_video"] = wandb.Video(
-        #                 v.transpose(0, 3, 1, 2), fps=10, format="gif"
-        #             )
-
-        # if (
-        #     "returns" in tokenizer_manager.tokenizers
-        #     and tokenizer_manager.tokenizers["returns"].discrete
-        # ):
-        #     bc_sampler = lambda o, t: sample_action_git(
-        #         o, t, model, tokenizer_manager, observation_shape, action_shape, device
-        #     )
-        #     results, videos = evaluate(
-        #         bc_sampler,
-        #         self.dataset.env,
-        #         5,
-        #         (self.observation_dim,),
-        #         (self.action_dim,),
-        #         num_videos=0,
-        #     )
-        #     for k, v in results.items():
-        #         log_data[f"eval_git/{k}"] = v
-        #     for idx, v in enumerate(videos):
-        #         log_data[f"eval_git_video_{idx}/video"] = wandb.Video(
-        #             v.transpose(0, 3, 1, 2), fps=10, format="gif"
-        #         )
+        if "returns" in tokenizer_manager.tokenizers:
+            for p in [0.6, 0.7, 0.8, 0.9, 1.0, 1.1]:
+                bc_sampler = lambda o, t: sample_action_bc_two_stage(
+                    o,
+                    t,
+                    model,
+                    tokenizer_manager,
+                    observation_shape,
+                    action_shape,
+                    device,
+                    percentage=p,
+                )
+                results, videos = evaluate(
+                    bc_sampler,
+                    self.dataset.env,
+                    20,
+                    (self.observation_dim,),
+                    (self.action_dim,),
+                    num_videos=0,
+                )
+                for k, v in results.items():
+                    log_data[f"eval_ts/p={p}_{k}"] = v
+                for idx, v in enumerate(videos):
+                    log_data[f"eval_ts_video_{idx}/p={p}_video"] = wandb.Video(
+                        v.transpose(0, 3, 1, 2), fps=10, format="gif"
+                    )
 
         return log_data
 
@@ -533,12 +506,14 @@ def sample_action_bc2(
 
     i = -1
     max_len = min(traj_len - 1, len(traj))
+    assert max_len < traj_len
     for i in range(max_len):
         observations[i] = traj.observations[-max_len + i]
         actions[i] = traj.actions[-max_len + i]
         # rewards[i] = traj.rewards[-max_len + i]
         masks[i] = 1
 
+    assert i == max_len - 1
     # fill in the rest with the current observation
     observations[i + 1] = observation
     obs_mask = np.copy(masks)
@@ -875,8 +850,9 @@ def evaluate(
         while not done:
             action = sample_actions(observation, trajectory_history)
             action = np.clip(action, -1, 1)
-            observation, reward, done, info = env.step(action)
+            new_observation, reward, done, info = env.step(action)
             trajectory_history = trajectory_history.append(observation, action, reward)
+            observation = new_observation
             if len(videos) < num_videos:
                 try:
                     imgs.append(env.sim.render(64, 48, camera_name="track")[::-1])

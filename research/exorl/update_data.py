@@ -21,18 +21,6 @@ import utils
 from replay_buffer import load_episode
 from train_offline import get_domain
 
-# TODO add other environments
-env_joints_map = {
-    "walker": [
-        "right_hip",
-        "right_knee",
-        "right_ankle",
-        "left_hip",
-        "left_knee",
-        "left_ankle",
-    ]
-}
-
 
 def relable_episode(env, episode):
     image_list = []
@@ -84,12 +72,11 @@ def main(
     num_workers: int = 0,
     env_name: Literal[
         "walker",
-        # TODO -  only walker is supported now: see other TODO at the top of the page
-        # "cartpole",
-        # "cheetah",
-        # "jaco",
-        # "point_mass_maze",
-        # "quadruped",
+        "cartpole",
+        "cheetah",
+        "jaco",
+        "point_mass_maze",
+        "quadruped",
     ] = "walker",
     expl_agent: Literal[
         "aps",
@@ -117,16 +104,14 @@ def main(
     elif env_name == "quadruped":
         task = "quadruped_run"
 
-    # work_dir = Path.cwd()
-    work_dir = Path("/checkpoint/philippwu/exorl")
+    work_dir = Path.cwd()
     utils.set_seed_everywhere(seed)
 
     # create envs
 
     # create data storage
     domain = get_domain(task)
-    # datasets_dir = work_dir / replay_buffer_dir
-    datasets_dir = work_dir
+    datasets_dir = work_dir / replay_buffer_dir
     replay_dir = datasets_dir.resolve() / domain / expl_agent / "buffer"
     replay_img_dir = datasets_dir.resolve() / domain / expl_agent / "buffer_updated"
     os.makedirs(replay_img_dir, exist_ok=True)

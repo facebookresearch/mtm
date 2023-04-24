@@ -10,6 +10,7 @@ import torch
 from torch.utils.data import Dataset
 
 from research.mtm.datasets.base import DatasetProtocol, DataStatistics
+from research.mtm.tokenizers.base import TokenizerManager
 
 
 def get_datasets(
@@ -57,7 +58,9 @@ class SinusoidDataset(Dataset, DatasetProtocol):
     def __getitem__(self, idx: int):
         return dict(states=self._data[idx].numpy())
 
-    def eval_logs(self, model: Callable) -> Dict[str, Any]:
+    def eval_logs(
+        self, model: Callable, tokenizer_manager: TokenizerManager
+    ) -> Dict[str, Any]:
         return {}
 
     def trajectory_statistics(self) -> Dict[str, DataStatistics]:

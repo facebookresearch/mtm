@@ -10,5 +10,5 @@ tokenizers:
       _target_: research.mtm.tokenizers.continuous.ContinuousTokenizer.create
 
 wandb:
-    project: "exorl_01_04"
+    project: "exorl"
     resume: allow

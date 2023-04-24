@@ -298,16 +298,16 @@ class MLP_BC(nn.Module):
             results, videos = evaluate(
                 fn,
                 env,
-                50,
+                20,
                 observation_shape,
                 action_shape,
                 num_videos=0,
             )
 
             for k, v in results.items():
-                eval_dict[f"eval/{k}"] = v
+                eval_dict[f"eval_bc/{k}"] = v
             for idx, v in enumerate(videos):
-                eval_dict[f"eval_video_{idx}/video"] = wandb.Video(
+                eval_dict[f"eval_bc_video_{idx}/video"] = wandb.Video(
                     v.transpose(0, 3, 1, 2), fps=10, format="gif"
                 )
         elif self.config.task == "rcbc":
@@ -316,16 +316,16 @@ class MLP_BC(nn.Module):
                 results, videos = evaluate(
                     fn,
                     env,
-                    50,
+                    20,
                     observation_shape,
                     action_shape,
                     num_videos=0,
                 )
 
                 for k, v in results.items():
-                    eval_dict[f"eval/{k}_{p}"] = v
+                    eval_dict[f"eval_rcbc/{k}_{p}"] = v
                 for idx, v in enumerate(videos):
-                    eval_dict[f"eval_video_{idx}_{p}/video"] = wandb.Video(
+                    eval_dict[f"eval_rcbc_video_{idx}_{p}/video"] = wandb.Video(
                         v.transpose(0, 3, 1, 2), fps=10, format="gif"
                     )
         else:
@@ -344,7 +344,7 @@ class MLP_BC(nn.Module):
             discrete_map (Dict[str, bool]): discrete_map
         """
         states = eval_batch["states"]
-        actions = eval_batch["actions"][:, -2, :]
+        actions = eval_batch["actions"]
         B, T, S = states.shape
 
         predict_logits = self(
@@ -354,66 +354,25 @@ class MLP_BC(nn.Module):
             "actions"
         ]
 
-        action_error = ((predicted_action - actions) ** 2).mean()
+        action_error = []
+
+        for i in range(B):
+            # set state to be the second to last state
+            phys_state = np.zeros(S + 2)
+            phys_state[2:] = states[i, T - 2].detach().cpu().numpy()
+            # get the action from the model
+            action = predicted_action[i, 0].detach().cpu().numpy()
+            # get the ground truth action
+            gt_action = actions[i, T - 2].detach().cpu().numpy()
+            # compute action error
+            action_error.append((action - gt_action) ** 2)
+            # compute state error
+
         eval_dict = {}
-        eval_dict[f"eval/id_action_error_r"] = torch.mean(
+        eval_dict["eval/id_action_error"] = torch.mean(
             torch.tensor(action_error)
         ).item()
         return eval_dict
-
-        # state_error = []
-        # gt_state_error = []
-        # action_error = []
-        #
-        # for i in range(B):
-        #     # set state to be the second to last state
-        #     env.reset()
-        #     phys_state = np.zeros(S + 2)
-        #     phys_state[2:] = states[i, T - 2].detach().cpu().numpy()
-        #     env.sim.set_state_from_flattened(phys_state.copy())
-        #     env.sim.forward()
-        #     # get the action from the model
-        #     action = predicted_action[i, 0].detach().cpu().numpy()
-        #     action = np.clip(action, -1, 1)
-        #
-        #     # get the ground truth action
-        #     gt_action = actions[i, T - 2].detach().cpu().numpy()
-        #     # get the next state
-        #     next_state = states[i, T - 1].detach().cpu().numpy()
-        #     # get the next state from the model
-        #     next_state_model = env.step(action)[0]
-        #
-        #     # reset and test groud truth action
-        #     env.reset()
-        #     env.sim.set_state_from_flattened(phys_state.copy())
-        #     env.sim.forward()
-        #     next_state_gt = env.step(gt_action)[0]
-        #     qpos_size = env.sim.data.qpos.shape[0]
-        #
-        #     # compute action error
-        #     action_error.append((action - gt_action) ** 2)
-        #     # compute state error
-        #     state_error.append(
-        #         (next_state[:qpos_size] - next_state_model[:qpos_size]) ** 2
-        #     )
-        #     gt_error = (next_state[:qpos_size] - next_state_gt[:qpos_size]) ** 2
-        #
-        #     # if np.sum(gt_error) > 1e-7:
-        #     #     print(gt_error)
-        #     #     import ipdb; ipdb.set_trace();
-        #     #     print("minor")
-        #
-        #     gt_state_error.append(gt_error)
-        #
-        # eval_dict = {}
-        # eval_dict["eval/id_state_error"] = torch.mean(torch.tensor(state_error)).item()
-        # eval_dict["eval/id_action_error"] = torch.mean(
-        #     torch.tensor(action_error)
-        # ).item()
-        # eval_dict["eval/id_gt_state_error"] = torch.mean(
-        #     torch.tensor(gt_state_error)
-        # ).item()
-        # return eval_dict
 
     def eval_fd(
         self, env, eval_batch, tokenizer_manager, discrete_map

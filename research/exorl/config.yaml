@@ -16,7 +16,7 @@ log_every_steps: 1000
 eval_every_steps: 100
 num_eval_episodes: 10
 # dataset
-replay_buffer_dir: /private/home/philippwu/mtm/research/exorl/datasets/
+replay_buffer_dir: ~/mtm/research/exorl/datasets/
 replay_buffer_size: 1000000
 replay_buffer_num_workers: 4
 batch_size: ${agent.batch_size}

@@ -11,9 +11,8 @@ from research.mtm.datasets.base import DatasetProtocol, DataStatistics
 from research.mtm.datasets.sequence_dataset import (
     evaluate,
     sample_action_bc,
-    sample_action_bc5,
+    sample_action_bc2,
     sample_action_bc_two_stage,
-    sample_action_cem,
 )
 from research.mtm.tokenizers.base import TokenizerManager
 
@@ -42,12 +41,10 @@ def get_datasets(
     train_val_split: float = 0.95,
     discount: float = 1.5,
     use_achieved: bool = False,
-    data_dir: str = "/checkpoint/aravraj/mtm_data/noisy_adroit",
+    data_dir: str = "~/adroit_data",
 ):
-    assert env_name in ["relocate", "pen", "hammer", "door"]
-    assert d_name in ["expert", "medium_replay", "full_replay"]
-    if env_name == "pen":
-        data_dir: str = "/checkpoint/aravraj/mtm_data/adroit"
+    assert env_name in ["pen", "door"]
+    assert d_name in ["expert", "medium_replay"]
 
     env_n = f"{env_name}-v0"
     if use_achieved:
@@ -68,11 +65,11 @@ def get_datasets(
     train_episodes = episodes[:cutoff]
     val_episodes = episodes[cutoff:]
 
-    if len(train_episodes) < 50:
+    if len(train_episodes) < 20:
         # copy 100 times speed up training
         train_episodes = train_episodes * 100
 
-    if len(val_episodes) < 50:
+    if len(val_episodes) < 20:
         # copy 100 times speed up training
         val_episodes = val_episodes * 100
 
@@ -274,21 +271,21 @@ class OfflineReplayBuffer(Dataset, DatasetProtocol):
         results, videos = evaluate(
             bc_sampler,
             self._env,
-            50,
+            20,
             state_shape,
             action_shape,
             num_videos=0,
         )
         for k, v in results.items():
-            log_data[f"eval1/{k}"] = v
+            log_data[f"eval_bc/{k}"] = v
         for idx, v in enumerate(videos):
-            log_data[f"eval1_video_{idx}/video"] = wandb.Video(
+            log_data[f"eval_bc_video_{idx}/video"] = wandb.Video(
                 v.transpose(0, 3, 1, 2), fps=10, format="gif"
             )
 
         if "returns" in tokenizer_manager.tokenizers:
             for p in [0.6, 0.7, 0.8, 0.9, 1.0, 1.1]:
-                bc_sampler = lambda o, t: sample_action_bc5(
+                bc_sampler = lambda o, t: sample_action_bc2(
                     o,
                     t,
                     model,
@@ -301,7 +298,7 @@ class OfflineReplayBuffer(Dataset, DatasetProtocol):
                 results, videos = evaluate(
                     bc_sampler,
                     self._env,
-                    50,
+                    20,
                     state_shape,
                     action_shape,
                     num_videos=0,
@@ -329,7 +326,7 @@ class OfflineReplayBuffer(Dataset, DatasetProtocol):
                     results, videos = evaluate(
                         bc_sampler,
                         self._env,
-                        50,
+                        20,
                         state_shape,
                         action_shape,
                         num_videos=0,
@@ -341,30 +338,6 @@ class OfflineReplayBuffer(Dataset, DatasetProtocol):
                             v.transpose(0, 3, 1, 2), fps=10, format="gif"
                         )
 
-        if "returns" in tokenizer_manager.tokenizers:
-            bc_sampler = lambda o, t: sample_action_cem(
-                o,
-                t,
-                model,
-                tokenizer_manager,
-                (0,) + state_shape,
-                (0,) + action_shape,
-                device,
-            )
-            results, videos = evaluate(
-                bc_sampler,
-                self._env,
-                50,
-                state_shape,
-                action_shape,
-                num_videos=0,
-            )
-            for k, v in results.items():
-                log_data[f"eval_cem/p={p}_{k}"] = v
-            for idx, v in enumerate(videos):
-                log_data[f"eval_cem_video_{idx}/p={p}_video"] = wandb.video(
-                    v.transpose(0, 3, 1, 2), fps=10, format="gif"
-                )
         return log_data
 
 

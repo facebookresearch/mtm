@@ -17,5 +17,5 @@ dataset:
     train_val_split: 0.95
 
 wandb:
-    project: "rew_fix_d4rl_new_12_30"
+    project: "d4rl"
     resume: allow

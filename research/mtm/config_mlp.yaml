@@ -26,12 +26,12 @@ args:
 
     log_every: 100
     print_every: 1000
-    eval_every: 10000
+    eval_every: 20000
     save_every: 10000
 
     device: cuda
     warmup_steps: 5000
-    num_train_steps: 200001
+    num_train_steps: 140010
     learning_rate: 0.0002
     weight_decay:  0.005
 

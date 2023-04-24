@@ -1037,8 +1037,6 @@ def _main(hydra_cfg):
 
             # ranodmly select mask
             masks = random.choice(mask_functions)()
-            while torch.stack([v.sum() for v in masks.values()]).sum() == 0:
-                masks = random.choice(mask_functions)()
 
             if "images" in batch and "images" not in masks:
                 masks["images"] = masks["states"]

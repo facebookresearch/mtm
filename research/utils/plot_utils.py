@@ -41,8 +41,6 @@ class _PlotHandler:
         size: Optional[Tuple[int, int]] = None,
     ) -> Iterator:
         """Initialize a 2D plot within a context."""
-        # TODO maybe make own style
-        # plt.style.use('ggplot')
         if sp_shape is not None:
             # if custom shape is passed, assume plot customized locally
             if size is not None:
@@ -68,8 +66,6 @@ class _PlotHandler:
     @contextmanager
     def plot3d_context(self, settings: PlotSettings = PlotSettings()) -> Iterator:
         """Initialize a 3D plot within a context."""
-        # TODO maybe make own style
-        # plt.style.use('ggplot')
         fig = plt.figure()
         ax = fig.add_subplot(111, projection="3d")
 
