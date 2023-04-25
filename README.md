@@ -43,7 +43,7 @@ All code is located in the `mtm` folder.
  * Adroit `python research/mtm/train.py +exp_mtm=adroit_cont`
  * Adroit `python research/mtm/train.py +exp_mtm=exorl_cont`
 
-An example notebook is located at `researach/mtm/example_train_sinusoid.ipynb`.
+An example notebook is located at `example_train_sinusoid.ipynb` which shows a simple example of how MTM can be used for trajectory prediction on a sinusoid dataset.
 
 ### Running specific experiments
  * Experiment configuration yaml files are located in `research/mtm/experiments`
