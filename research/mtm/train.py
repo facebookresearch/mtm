@@ -467,18 +467,10 @@ def create_eval_logs_states(
     seq_len = trajectories["states"].shape[1]
 
     # Given initial state and all actions. Predict future states.
-    obs_mask1 = np.ones(seq_len)
-    obs_mask1[1:] = 0
-
-    obs_mask2 = np.ones(seq_len)
-    obs_mask2[1:-1] = 0
-
     obs_mask3 = np.ones(seq_len)
-    obs_mask3[seq_len // 2 + 3 :] = 0
+    obs_mask3[seq_len // 2 + 2 :] = 0
 
     obs_use_mask_list = [
-        obs_mask1,
-        obs_mask2,
         obs_mask3,
     ]
 
@@ -490,7 +482,7 @@ def create_eval_logs_states(
             }
         )
 
-    prefixs = ["[6:]", "[1:-1]", "[half+1:]"]
+    prefixs = ["prediction"]
     return make_plots_with_masks(
         predict_fn,
         trajectories,
@@ -1157,6 +1149,16 @@ def _main(hydra_cfg):
         step += 1
         if step >= cfg.num_train_steps:
             break
+
+    torch.save(
+        {
+            "model": model.state_dict(),
+            "optimizer": optimizer.state_dict(),
+            "step": step,
+            "eval_max": dict(eval_max),
+        },
+        f"model_{step}.pt",
+    )
 
 
 @hydra.main(config_path=".", config_name="config", version_base="1.1")
