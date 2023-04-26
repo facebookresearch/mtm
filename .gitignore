@@ -43,7 +43,3 @@ research/exorl/notebooks/
 research/exorl/slurm/
 research/exorl/data/
 research/exorl/datasets/
-
-research/url_benchmark/exp_local/
-research/url_benchmark/pretrained_models/
-research/url_benchmark/exp_sweep/

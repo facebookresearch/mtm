@@ -36,19 +36,13 @@ If you wish to run Adroit experiments, please install also install `robohive`.
 * Additionally you must download the adroit datasets and put them in the `~/mtm_data` directory
 
 # Running The MTM code
-All code is located in the `mtm` folder.
+Example commands can be found in `train_examples.sh`
+An example notebook is located at `example_train_sinusoid.ipynb` which shows a simple example of how MTM can be used for trajectory prediction on a sinusoid dataset.
 
+The main code is located in the `mtm` folder. Here is how you can run some of the experiments.
  * Simple sinusoidal test data `python research/mtm/train.py +exp_mtm=sinusoid_cont`
  * D4RL `python research/mtm/train.py +exp_mtm=d4rl_cont`
  * Adroit `python research/mtm/train.py +exp_mtm=adroit_cont`
- * Adroit `python research/mtm/train.py +exp_mtm=exorl_cont`
-
-An example notebook is located at `example_train_sinusoid.ipynb` which shows a simple example of how MTM can be used for trajectory prediction on a sinusoid dataset.
-
-### Running specific experiments
- * Experiment configuration yaml files are located in `research/mtm/experiments`
- * To run one you can append a `+experiments="file_name"` to the command. For example, to use the `exorl_discrete.yaml` config run:
-   * `CUDA_VISIBLE_DEVICES=0 python research/mtm/train.py +experiments=exorl_discrete`
 
 ### Configuring MTM
  * The config file for mtm is located at `research/mtm/config.yaml`
@@ -63,7 +57,6 @@ An example notebook is located at `example_train_sinusoid.ipynb` which shows a s
 ### pre-commit hooks
 
 pre-commits hooks are great. This will automatically do some checking/formatting. To use the pre-commit hooks, run the following:
-
 ```
 pip install pre-commit
 pre-commit install
