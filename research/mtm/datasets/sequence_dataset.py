@@ -978,60 +978,6 @@ def sample_action_cem(
     return a
 
 
-# class StateActionDataset(torch.utils.data.Dataset):
-#     @staticmethod
-#     def get_default_config(updates=None):
-#         config = ConfigDict()
-#         config.path = ""
-#         config.seed = 0
-#         config.env_name = "halfcheetah-expert-v2"
-#
-#         config.start_index = 0
-#         config.max_length = int(1e9)
-#         config.random_start = False
-#
-#         if updates is not None:
-#             config.update(ConfigDict(updates).copy_and_resolve_references())
-#         return config
-#
-#     def __init__(self, config, start_offset_ratio=None):
-#         self.config = self.get_default_config(config)
-#         assert self.config.path != ""
-#
-#         if self.config.random_start:
-#             # Bypass numpy random seed
-#             self.random_start_offset = np.random.default_rng().choice(len(self))
-#         elif start_offset_ratio is not None:
-#             self.random_start_offset = int(len(self) * start_offset_ratio) % len(self)
-#         else:
-#             self.random_start_offset = 0
-#
-#         env = make_env(config.env_name, config.seed, None)
-#         dataset = D4RLDataset(env)
-#
-#     def __getstate__(self):
-#         return self.config, self.random_start_offset
-#
-#     def __setstate__(self, state):
-#         config, random_start_offset = state
-#         self.__init__(config)
-#         self.random_start_offset = random_start_offset
-#
-#     def __len__(self):
-#         return min(
-#             self.h5_file["jpg"].shape[0] - self.config.start_index,
-#             self.config.max_length,
-#         )
-#
-#     def process_index(self, index):
-#         index = (index + self.random_start_offset) % len(self)
-#         return index + self.config.start_index
-#
-#     def __getitem__(self, raw_index):
-#         index = self.process_index(raw_index)
-#         return states, actions
-
-
 def episode_len(episode):
     # subtract -1 because the dummy first transition
     return next(iter(episode.values())).shape[0] - 1
@@ -1262,41 +1208,3 @@ def make_replay_loader(
         obs,
     )
     return iterable
-
-    # loader = torch.utils.data.DataLoader(
-    #     iterable,
-    #     batch_size=batch_size,
-    #     num_workers=num_workers,
-    #     pin_memory=True,
-    #     worker_init_fn=_worker_init_fn,
-    # )
-    # return loader
-
-
-def main():
-    import torch
-    import tqdm
-
-    # env = make_env("kitchen-complete-v0", 0, None)
-    env = make_env("kitchen-mixed-v0", 0, None)
-    dataset = D4RLDataset(env)
-    sd = SequenceDataset(dataset, sequence_length=128)
-    dataloader = torch.utils.data.DataLoader(
-        sd,
-        batch_size=1,
-        shuffle=False,
-        drop_last=True,
-        num_workers=0,
-        prefetch_factor=2,
-    )
-    sd.trajectory_statistics
-    import ipdb
-
-    ipdb.set_trace()
-
-    for batch in tqdm.tqdm(dataloader):
-        pass
-
-
-if __name__ == "__main__":
-    main()
