@@ -7,9 +7,8 @@ If you find our work useful, consider citing:
 @misc{wu2023mtm,
   author = {Wu, Philipp and Majumdar, Arjun and Stone, Kevin and Lin, Yixin and Mordatch, Igor and Abbeel, Pieter and Rajeswaran, Aravind},
   title = {Masked Trajectory Models for Prediction, Representation, and Control},
-  year = {2023},
-  url = {https://github.com/facebookresearch/mtm}
   booktitle = {International Conference on Machine Learning},
+  year = {2023},
 }
 ```
 
