@@ -1,0 +1,45 @@
+# keep each top level section alphabetical
+# keep each item within the sections alphabetical
+
+# large files
+*.png
+*.pdf
+*.gif
+
+# mac
+*.DS_Store
+
+# misc
+*core
+*logs*
+*runs*
+*tb_logs*
+*wandb
+*wandb_logs*
+outputs*
+
+# python
+*__pycache__
+*.egg-info
+*.hypothesis
+*.ipynb_checkpoints
+*.mypy_cache
+*.pyc
+*.npy
+*.npz
+
+# vim
+*.swp
+
+
+# exorl
+research/exorl/__pycache__/
+research/exorl/.ipynb_checkpoints/
+research/exorl/exp_local
+research/exorl/output
+research/exorl/nbs
+research/exorl/tmp/
+research/exorl/notebooks/
+research/exorl/slurm/
+research/exorl/data/
+research/exorl/datasets/

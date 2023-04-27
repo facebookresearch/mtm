@@ -1,0 +1,26 @@
+# @package _global_
+defaults:
+    - override /datasets: d4rl
+
+tokenizers:
+    states:
+      _target_: research.mtm.tokenizers.continuous.ContinuousTokenizer.create
+    actions:
+      _target_: research.mtm.tokenizers.continuous.ContinuousTokenizer.create
+    returns:
+      _target_: research.mtm.tokenizers.continuous.ContinuousTokenizer.create
+
+state_only_dataset:
+    _target_: research.mtm.datasets.d4rl_ds.get_datasets
+    seq_steps: ???
+    env_name: "halfcheetah-expert-v2"
+    train_val_split: 0.95
+
+dataset:
+    use_reward: True
+    env_name: "halfcheetah-expert-v2"
+    train_val_split: 0.05
+
+wandb:
+    project: "rew_fix_d4rl_new_12_30"
+    resume: allow

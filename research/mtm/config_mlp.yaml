@@ -1,0 +1,51 @@
+defaults:
+    - datasets: d4rl
+    - override hydra/launcher: slurm
+    - override hydra/output: local
+    - _self_
+
+model_config:
+  _target_: research.mtm.models.mlp_model.MLPConfig
+  n_embd: 1024
+  n_layer: 2
+  task: "bc"
+
+args:
+    _target_: research.mtm.train_mlp.RunConfig
+    seed: 0
+    batch_size: 4096
+    n_workers: 10
+    traj_length: 1
+
+
+    ### Debug
+    # log_every: 1
+    # print_every: 1
+    # eval_every: 1
+    # save_every: 1
+
+    log_every: 100
+    print_every: 1000
+    eval_every: 20000
+    save_every: 10000
+
+    device: cuda
+    warmup_steps: 5000
+    num_train_steps: 140010
+    learning_rate: 0.0002
+    weight_decay:  0.005
+
+wandb:
+  project: d4rl_mlp_12_28
+  entity: ""
+  resume: null
+  # resume: allow
+  # mode: disabled
+
+# general outputs
+job_name: job
+
+hydra:
+    job:
+        name: mtm_mae
+        chdir: True

@@ -1,0 +1,22 @@
+# @package _global_
+defaults:
+    - override /datasets: d4rl
+
+tokenizers:
+    states:
+      _target_: research.mtm.tokenizers.uniform_bins.UniformBinningTokenizer.create
+      num_bins: 512
+    actions:
+      _target_: research.mtm.tokenizers.uniform_bins.UniformBinningTokenizer.create
+      num_bins: 512
+    returns:
+      _target_: research.mtm.tokenizers.uniform_bins.UniformBinningTokenizer.create
+      num_bins: 32
+
+
+dataset:
+    use_reward: True
+
+wandb:
+    project: "rew_fix_d4rl_new_12_30"
+    resume: allow

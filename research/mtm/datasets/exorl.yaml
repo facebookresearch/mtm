@@ -1,0 +1,10 @@
+# @package dataset
+_target_: research.mtm.datasets.exorl.get_datasets
+seq_steps: ???
+env_name: walker_walk
+seed: 0
+replay_buffer_dir: "~/mtm/exorl_data"
+train_max_size: 1000000
+# train_max_size: 10000
+val_max_size: 10000
+num_workers: ${args.n_workers}
