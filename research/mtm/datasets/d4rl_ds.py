@@ -1,3 +1,7 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates. All Rights Reserved.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+
 from research.jaxrl.datasets.d4rl_dataset import D4RLDataset
 from research.jaxrl.utils import make_env
 from research.mtm.datasets.sequence_dataset import SequenceDataset
