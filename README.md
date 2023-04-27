@@ -84,8 +84,10 @@ If you want to make a commit without using the pre-commit hook, you can commit w
  * All tokenizer code is found in the `research/mtm/tokenizers` folder. Each tokenizer should inherit from the `Tokenizer` abstract class, found in `research/mtm/tokenizers/base.py`
  * `Tokenizers` must define a `create` method, which can handle dataset specific construction logic.
 
-# Acknowledgements
-This research would not be possible without building on top of existing open source code. We would like to acknowledge and thank the following:
+# License & Acknowledgements
+This source code is licensed under the MIT license found in the LICENSE file in the root directory of this source tree. This is not an official Meta product.
+
+This project builds on top of or utilizes the following third party dependences.
  * [FangchenLiu/MaskDP_public](https://github.com/FangchenLiu/MaskDP_public): Masked Decision Prediction, which this work builds upon
  * [ikostrikov/jaxrl](https://github.com/ikostrikov/jaxrl): A fast Jax library for RL. We used this environment wrapping and data loading code for all d4rl experiments.
  * [denisyarats/exorl](https://github.com/denisyarats/exorl): ExORL provides datasets collected with unsupervised RL methods which we use in representation learning experiments
