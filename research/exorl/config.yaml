@@ -1,0 +1,39 @@
+defaults:
+    - agent: td3
+    - override hydra/launcher: slurm
+    - override hydra/output: local
+    - _self_
+
+# unsupervised exploration
+expl_agent: proto
+# task settings
+task: walker_walk
+discount: 0.99
+# train settings
+num_grad_steps: 100000
+log_every_steps: 1000
+# eval
+eval_every_steps: 100
+num_eval_episodes: 10
+# dataset
+replay_buffer_dir: ~/mtm/research/exorl/datasets/
+replay_buffer_size: 1000000
+replay_buffer_num_workers: 4
+batch_size: ${agent.batch_size}
+# misc
+seed: 2
+device: cuda
+save_video: true
+use_tb: true
+
+experiment_tag: e2e
+
+# hydra:
+#   run:
+#     dir: ./output/${now:%Y.%m.%d}/${now:%H%M%S}_${agent.name}
+job_name: job
+
+hydra:
+    job:
+        name: mtm_mae
+        chdir: True

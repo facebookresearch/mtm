@@ -1,0 +1,21 @@
+# @package _global_
+defaults:
+    - override /datasets: d4rl
+
+tokenizers:
+    states:
+      _target_: research.mtm.tokenizers.continuous.ContinuousTokenizer.create
+    actions:
+      _target_: research.mtm.tokenizers.continuous.ContinuousTokenizer.create
+    returns:
+      _target_: research.mtm.tokenizers.continuous.ContinuousTokenizer.create
+
+
+dataset:
+    use_reward: True
+    env_name: "hopper-expert-v2"
+    train_val_split: 0.95
+
+wandb:
+    project: "d4rl"
+    resume: allow

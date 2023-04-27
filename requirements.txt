@@ -1,0 +1,15 @@
+d4rl@git+https://github.com/ikostrikov/d4rl.git@99c475c7e187b370fa7621c6b2771d20421a4f18
+dmc2gym@git+https://github.com/denisyarats/dmc2gym.git@06f7e335d988b17145947be9f6a76f557d0efe81
+
+cloudpickle
+dm_control==1.0.11
+einops
+gym==0.19
+hydra-core
+imageio==2.21.3
+iopath==0.1.10
+matplotlib
+patchelf
+tqdm==4.64.1
+tyro
+wandb

@@ -1,0 +1,8 @@
+# @package dataset
+_target_: research.mtm.datasets.adroit.get_datasets
+seq_steps: ???
+env_name: "door"
+d_name: "expert"
+train_val_split: 0.95
+discount: 1.5
+use_achieved: True

@@ -1,0 +1,22 @@
+# @package _global_
+defaults:
+    - override /datasets: exorl
+
+
+tokenizers:
+    states:
+      _target_: research.mtm.tokenizers.uniform_bins.UniformBinningTokenizer.create
+      num_bins: 64
+    actions:
+      _target_: research.mtm.tokenizers.uniform_bins.UniformBinningTokenizer.create
+      num_bins: 64
+    rewards:
+      _target_: research.mtm.tokenizers.uniform_bins.UniformBinningTokenizer.create
+      num_bins: 64
+
+dataset:
+    use_rewards: True
+
+wandb:
+    project: "exorl_01_04"
+    resume: allow
