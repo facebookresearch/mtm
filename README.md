@@ -39,7 +39,7 @@ pip install -r requirements_dev.txt
 ```
 
 ### Adroit Experiments [Optional]
-Please refer to the (Adroit Instructions)[AdroitSetup.md] for preparing the datasets and environment.
+Please refer to the [Adroit Instructions](./AdroitSetup.md) for preparing the datasets and environment.
 
 # Running The MTM code
 Example commands can be found in `train_examples.sh`
