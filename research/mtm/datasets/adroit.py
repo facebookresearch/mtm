@@ -41,7 +41,7 @@ def get_datasets(
     train_val_split: float = 0.95,
     discount: float = 1.5,
     use_achieved: bool = False,
-    data_dir: str = "~/mtm_data/adroit_data",
+    data_dir: str = "~/arxiv_data",
 ):
     assert env_name in ["pen", "door"]
     assert d_name in ["expert", "medium_replay"]

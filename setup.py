@@ -14,7 +14,7 @@ def read_requirements_file(filename):
 
 setup(
     name="research",
-    version="0.0.1",
+    version="1.0.0",
     author="Philipp Wu",
     author_email="philippwu@berkeley.edu",
     description="mtm",

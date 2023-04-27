@@ -1,10 +1,10 @@
-# Masked Trajectory Model
+# Masked Trajectory Models
 
 This is the official code base for the paper `Masked Trajectory Models for Prediction, Representation, and Control`
 
 If you find our work useful, consider citing:
 ```
-@misc{wu2023mtm,
+@inproceedings{wu2023mtm,
   author = {Wu, Philipp and Majumdar, Arjun and Stone, Kevin and Lin, Yixin and Mordatch, Igor and Abbeel, Pieter and Rajeswaran, Aravind},
   title = {Masked Trajectory Models for Prediction, Representation, and Control},
   booktitle = {International Conference on Machine Learning},
@@ -39,12 +39,7 @@ pip install -r requirements_dev.txt
 ```
 
 ### Adroit Experiments [Optional]
-If you wish to run Adroit experiments, please install also install `robohive`.
- * [mjrl](https://github.com/aravindr93/mjrl/tree/pvr_beta_1) - use the `pvr_beta_1` branch
-   * `pip install git+https://github.com/aravindr93/mjrl.git@83d35df95eb64274c5e93bb32a0a4e2f6576638a`
- * [robohive](https://github.com/vikashplus/robohive/tree/stable) - use the `stable` branch (note, it uses gitsubmodules, follow install instructions exactly)
-   * specifically, we have tested using this commit - `c1557f5572977085f053df63f4e81f4b4e1fb17c`
-* Additionally you must download the adroit datasets and put them in the `~/mtm_data` directory
+Please refer to the (Adroit Instructions)[AdroitSetup.md] for preparing the datasets and environment.
 
 # Running The MTM code
 Example commands can be found in `train_examples.sh`
@@ -53,7 +48,7 @@ An example notebook is located at `example_train_sinusoid.ipynb` which shows a s
 The main code is located in the `mtm` folder. Here is how you can run some of the experiments.
  * Simple sinusoidal test data `python research/mtm/train.py +exp_mtm=sinusoid_cont`
  * D4RL `python research/mtm/train.py +exp_mtm=d4rl_cont`
- * Adroit `python research/mtm/train.py +exp_mtm=adroit_cont`
+ * Adroit `python research/mtm/train.py +exp_mtm=adroit_cont` (needs Adroit setup)
 
 ### Configuring MTM
  * The config file for mtm is located at `research/mtm/config.yaml`
