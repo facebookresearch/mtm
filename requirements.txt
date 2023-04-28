@@ -4,7 +4,7 @@ dmc2gym@git+https://github.com/denisyarats/dmc2gym.git@06f7e335d988b17145947be9f
 cloudpickle
 dm_control==1.0.11
 einops
-gym==0.19
+gym==0.19.0
 hydra-core
 imageio==2.21.3
 iopath==0.1.10
