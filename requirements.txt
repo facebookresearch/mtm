@@ -10,6 +10,6 @@ imageio==2.21.3
 iopath==0.1.10
 matplotlib
 patchelf
-tqdm==4.64.1
+tqdm==4.66.3
 tyro
 wandb
